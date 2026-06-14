@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+
+    <i class="bi bi-star-fill"></i>
+
+    Мои избранные
+
+</h1>
+
+<hr>
+
+<div class="row">
+
+    {% for favorite in favorites %}
+
+    <div class="col-lg-4 col-md-6 mb-4">
+
+        <div class="card quiz-card h-100">
+
+            {% if favorite.quiz.image %}
+
+            <img
+                src="{{ favorite.quiz.image.url }}"
+                class="card-img-top">
+
+            {% endif %}
+
+            <div class="card-body">
+
+                <h4>
+
+                    <a href="{% url 'quiz_detail' favorite.quiz.id %}">
+
+                        {{ favorite.quiz.title }}
+
+                    </a>
+
+                </h4>
+
+                <p>
+
+                    {{ favorite.quiz.get_category_display }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p>
+
+        Пока нет избранных викторин.
+
+    </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

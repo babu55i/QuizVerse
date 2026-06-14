@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="mb-4">
+
+        Добавить вопрос
+
+    </h1>
+
+    <h5 class="mb-3">
+
+        Викторина: {{ quiz.title }}
+
+    </h5>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button
+            type="submit"
+            class="btn btn-primary">
+
+            Сохранить вопрос
+
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

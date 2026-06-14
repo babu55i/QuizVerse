@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">
+
+Мои викторины
+
+</h1>
+
+{% for quiz in quizzes %}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h4>
+
+            {{ quiz.title }}
+
+        </h4>
+
+        <p>
+
+            {{ quiz.get_category_display }}
+
+        </p>
+
+        <a
+            href="{% url 'quiz_detail' quiz.id %}"
+            class="btn btn-primary">
+
+            Открыть
+
+        </a>
+
+        <a
+                href="{% url 'edit_quiz' quiz.id %}"
+                class="btn btn-warning">
+
+            Редактировать
+
+        </a>
+
+        <a
+        href="{% url 'delete_quiz' quiz.id %}"
+        class="btn btn-danger">
+
+            Удалить
+
+        </a>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<p>
+
+У вас пока нет викторин.
+
+</p>
+
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1>
+
+        500
+
+    </h1>
+
+    <h3>
+
+        Ошибка сервера
+
+    </h3>
+
+    <p>
+
+        Что-то пошло не так.
+
+    </p>
+
+    <a
+        href="{% url 'quiz_list' %}"
+        class="btn btn-primary">
+
+        На главную
+
+    </a>
+
+</div>
+
+{% endblock %}

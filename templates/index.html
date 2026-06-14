@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+    <html lang="ru">
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+<h1>
+
+QuizVerse
+
+</h1>
+
+<p class="lead">
+
+Создавай викторины.
+
+Проходи испытания.
+
+Делись знаниями.
+
+</p>
+
+{% if user.is_authenticated %}
+
+<a
+class="btn btn-primary btn-lg"
+href="/quiz/">
+
+<i class="bi bi-grid"></i>
+
+Открыть каталог
+
+</a>
+
+{% else %}
+
+<a
+class="btn btn-primary btn-lg"
+href="/register/">
+
+<i class="bi bi-person-plus"></i>
+
+Начать
+
+</a>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

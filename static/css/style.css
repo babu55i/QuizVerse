@@ -1,0 +1,279 @@
+body {
+
+    background-color: #121212;
+    color: white;
+
+}
+
+
+.navbar {
+
+    background: #1b1b1b;
+    border-bottom: 1px solid #333;
+    margin-bottom: 20px;
+
+}
+
+.navbar-brand {
+
+    font-size: 28px;
+    color: #7c4dff !important;
+
+}
+
+.nav-link {
+
+    color: white !important;
+
+}
+
+.nav-link:hover {
+
+    color: #7c4dff !important;
+
+}
+
+
+
+.card {
+
+    background-color: #1e1e1e;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    transition: 0.3s;
+
+}
+
+.card-body {
+
+    color: white;
+
+}
+
+.quiz-card {
+
+    background: #1f1f1f;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.3s;
+
+}
+
+.quiz-card:hover {
+
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+}
+
+.card-title {
+
+    color: white;
+
+}
+
+.card-title a {
+
+    color: white;
+
+}
+
+.card-title a:hover {
+
+    color: #7c4dff;
+
+}
+
+
+
+.card-img-top {
+
+    height: 250px;
+    object-fit: cover;
+
+}
+
+.detail-image {
+
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+
+}
+
+
+
+a {
+
+    text-decoration: none;
+
+}
+
+.card a,
+.list-group-item a {
+
+    color: white;
+
+}
+
+.card a:hover,
+.list-group-item a:hover {
+
+    color: #7c4dff;
+
+}
+
+
+
+.btn-primary {
+
+    background: #7c4dff;
+    border: none;
+
+}
+
+.btn-primary:hover {
+
+    background: #6a3ee6;
+
+}
+
+
+
+.list-group-item {
+
+    background-color: #2a2a2a;
+    color: white;
+    border-color: #3a3a3a;
+
+}
+
+ol,
+ul {
+
+    color: white;
+
+}
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+
+    color: white;
+
+}
+
+.text-secondary {
+
+    color: #aaaaaa !important;
+
+}
+
+.text-muted {
+
+    color: #b0b0b0 !important;
+
+}
+
+
+
+.bi {
+
+    margin-right: 5px;
+
+}
+
+.bi-heart,
+.bi-heart-fill {
+
+    color: #ff4d6d;
+
+}
+
+.bi-chat {
+
+    color: #4dabf7;
+
+}
+
+.bi-star,
+.bi-star-fill {
+
+    color: #ffd43b;
+
+}
+
+.like-icon {
+
+    color: #ff4d6d;
+
+}
+
+
+.card ol,
+.card ul,
+.card li {
+
+    color: white !important;
+
+}
+
+.card h3,
+.card h4 {
+
+    color: white !important;
+
+}
+
+
+.quiz-card p {
+
+    color: #d0d0d0;
+
+}
+
+
+.quiz-card span {
+
+    color: white;
+
+}
+
+
+.list-group-item {
+
+    background-color: #2a2a2a !important;
+    color: white !important;
+    border: 1px solid #3a3a3a;
+
+}
+
+.list-group-item a {
+
+    color: white !important;
+
+}
+
+.list-group-item a:hover {
+
+    color: #7c4dff !important;
+
+}
+
+.card ol li {
+
+    color: white !important;
+
+}
+
+.card h3 {
+
+    color: white !important;
+
+}

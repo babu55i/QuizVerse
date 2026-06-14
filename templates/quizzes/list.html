@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">
+
+QuizVerse
+
+</h1>
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h4>
+
+            <i class="bi bi-fire"></i>
+
+            Популярные викторины
+
+        </h4>
+
+        <ul class="list-group">
+
+            {% for quiz in popular_quizzes %}
+
+            <li class="list-group-item d-flex justify-content-between">
+
+                <a href="{% url 'quiz_detail' quiz.id %}">
+
+                    {{ quiz.title }}
+
+                </a>
+
+                <span>
+
+                    <i class="bi bi-heart-fill like-icon"></i>
+
+                    {{ quiz.likes.count }}
+
+                </span>
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+<form
+    method="get"
+    class="mb-4">
+
+    <select
+    name="category"
+    class="form-select mt-2">
+
+    <option value="">
+
+        Все категории
+
+    </option>
+
+    {% for value, name in CATEGORY_CHOICES %}
+
+    {% if value != "none" %}
+
+    <option
+        value="{{ value }}"
+        {% if selected_category == value %}
+        selected
+        {% endif %}>
+
+        {{ name }}
+
+    </option>
+
+    {% endif %}
+
+    {% endfor %}
+
+    </select>
+
+    <div class="input-group">
+
+        <input
+            type="text"
+            name="q"
+            class="form-control"
+            placeholder="Поиск викторин..."
+            value="{{ search_query|default:'' }}">
+
+        <button
+            class="btn btn-primary"
+            type="submit">
+
+            <i class="bi bi-search"></i>
+
+        </button>
+
+    </div>
+
+</form>
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            <i class="bi bi-trophy"></i>
+
+            Топ недели
+
+        </h3>
+
+        <ol>
+
+            {% for player in top_week %}
+
+            <li>
+
+                {{ player.user__username }}
+
+                —
+
+                {{ player.perfect_count }}
+
+            </li>
+
+            {% empty %}
+
+            <li>
+
+                Пока нет данных
+
+            </li>
+
+            {% endfor %}
+
+        </ol>
+
+    </div>
+
+</div>
+
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <h3>
+
+            <i class="bi bi-trophy"></i>
+
+            Топ месяца
+
+        </h3>
+
+        <ol>
+
+            {% for player in top_month %}
+
+            <li>
+
+                {{ player.user__username }}
+
+                —
+
+                {{ player.perfect_count }}
+
+            </li>
+
+            {% empty %}
+
+            <li>
+
+                Пока нет данных
+
+            </li>
+
+            {% endfor %}
+
+        </ol>
+
+    </div>
+
+</div>
+
+<div class="row">
+
+{% for quiz in quizzes %}
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<div class="card quiz-card h-100">
+
+{% if quiz.image %}
+
+<img
+src="{{ quiz.image.url }}"
+class="card-img-top">
+
+{% endif %}
+
+    <nav>
+
+    <ul class="pagination justify-content-center">
+
+        {% if quizzes.has_previous %}
+
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ quizzes.previous_page_number }}">
+
+                Назад
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+        <li class="page-item active">
+
+            <span class="page-link">
+
+                {{ quizzes.number }}
+
+            </span>
+
+        </li>
+
+        {% if quizzes.has_next %}
+
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ quizzes.next_page_number }}">
+
+                Далее
+
+            </a>
+
+        </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>
+
+<div class="card-body">
+
+<h4 class="card-title">
+
+<a
+href="{% url 'quiz_detail' quiz.id %}">
+
+{{ quiz.title }}
+
+</a>
+
+</h4>
+
+<p class="text-secondary">
+
+<i class="bi bi-tag"></i>
+
+{{ quiz.get_category_display }}
+
+</p>
+
+<p>
+
+<i class="bi bi-person-circle"></i>
+
+{{ quiz.author.username }}
+
+</p>
+
+<hr>
+
+<div class="d-flex justify-content-between">
+
+<span>
+
+<i class="bi bi-heart"></i>
+
+{{ quiz.likes.count }}
+
+</span>
+
+<span>
+
+<i class="bi bi-chat"></i>
+
+0
+
+</span>
+
+<span>
+
+<i class="bi bi-star"></i>
+
+0.0
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

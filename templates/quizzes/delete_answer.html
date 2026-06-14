@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+
+Удаление ответа
+
+</h1>
+
+<p>
+
+Удалить ответ:
+
+<strong>
+
+{{ answer.text }}
+
+</strong>
+
+?
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="btn btn-danger">
+
+        Удалить
+
+    </button>
+
+</form>
+
+{% endblock %}

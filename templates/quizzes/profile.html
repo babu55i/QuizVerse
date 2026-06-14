@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">
+
+Профиль
+
+</h1>
+
+<a
+    href="{% url 'favorite_quizzes' %}"
+    class="btn btn-warning mb-3">
+
+    <i class="bi bi-star-fill"></i>
+
+    Мои избранные
+
+</a>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <h4>
+
+            <i class="bi bi-person-circle"></i>
+
+            {{ user.username }}
+
+        </h4>
+
+        <hr>
+
+        <p>
+
+            <i class="bi bi-file-earmark-text"></i>
+
+            Создано викторин:
+
+            <strong>{{ quizzes_count }}</strong>
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-check-circle"></i>
+
+            Пройдено викторин:
+
+            <strong>{{ completed_quizzes }}</strong>
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-trophy"></i>
+
+            Идеально пройдено:
+
+            <strong>{{ perfect_quizzes }}</strong>
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-heart-fill"></i>
+
+            Получено лайков:
+
+            <strong>{{ likes_received }}</strong>
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-star-fill"></i>
+
+            Избранных викторин:
+
+            <strong>{{ favorites_count }}</strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>
+
+Удаление вопроса
+
+</h1>
+
+<p>
+
+Удалить вопрос:
+
+<strong>
+
+{{ question.text }}
+
+</strong>
+
+?
+
+</p>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <button
+        type="submit"
+        class="btn btn-danger">
+
+        <i class="bi bi-trash"></i>
+
+        Удалить
+
+    </button>
+
+    <a
+        href="{% url 'quiz_detail' question.quiz.id %}"
+        class="btn btn-secondary">
+
+        Отмена
+
+    </a>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card quiz-card">
+
+    {% if quiz.image %}
+
+    <img
+        src="{{ quiz.image.url }}"
+        class="detail-image">
+
+    {% endif %}
+
+    <div class="card-body">
+
+        <h1>
+
+            {{ quiz.title }}
+
+        </h1>
+
+        {% if user == quiz.author %}
+
+        <a
+            href="{% url 'add_question' quiz.id %}"
+            class="btn btn-success mb-3">
+
+            Добавить вопрос
+
+        </a>
+
+        {% endif %}
+
+        <p>
+
+            <i class="bi bi-tag"></i>
+
+            {{ quiz.get_category_display }}
+
+        </p>
+
+        <p>
+
+            <i class="bi bi-person-circle"></i>
+
+            {{ quiz.author.username }}
+
+        </p>
+
+        <hr>
+
+        <p>
+
+            {{ quiz.description }}
+
+        </p>
+
+        <hr>
+
+        <div class="d-flex justify-content-between">
+
+    <span>
+
+        <i class="bi bi-heart"></i>
+
+        {{ likes_count }}
+
+    </span>
+
+    <span>
+
+        <i class="bi bi-chat"></i>
+
+        0
+
+    </span>
+
+    <span>
+
+        <i class="bi bi-star"></i>
+
+        0.0
+
+    </span>
+
+        </div>
+
+        <br>
+
+        <br>
+
+{% if user.is_authenticated and user != quiz.author %}
+
+<a
+    href="{% url 'toggle_like' quiz.id %}"
+    class="btn btn-outline-danger">
+
+    {% if user_liked %}
+
+        <i class="bi bi-heart-fill"></i>
+
+        Убрать лайк
+
+    {% else %}
+
+        <i class="bi bi-heart"></i>
+
+        Лайкнуть
+
+    {% endif %}
+
+</a>
+
+        {% if user.is_authenticated and user != quiz.author %}
+
+<a
+    href="{% url 'report_quiz' quiz.id %}"
+    class="btn btn-outline-warning">
+
+    <i class="bi bi-flag"></i>
+
+    Пожаловаться
+
+</a>
+
+{% endif %}
+
+        {% if user.is_authenticated %}
+
+<a
+    href="{% url 'toggle_favorite' quiz.id %}"
+    class="btn btn-outline-warning">
+
+    {% if user_favorited %}
+
+        <i class="bi bi-star-fill"></i>
+
+        Убрать из избранного
+
+    {% else %}
+
+        <i class="bi bi-star"></i>
+
+        В избранное
+
+    {% endif %}
+
+</a>
+
+{% endif %}
+
+{% endif %}
+
+<a
+    href="{% url 'take_quiz' quiz.id %}"
+    class="btn btn-primary">
+
+    Начать викторину
+
+</a>
+
+    </div>
+
+</div>
+
+<br>
+
+<hr>
+
+<h3>Вопросы</h3>
+
+{% for question in quiz.questions.all %}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <h5>
+
+            {{ question.text }}
+
+        </h5>
+
+        {% if user == quiz.author %}
+
+        <a
+    href="{% url 'edit_question' question.id %}"
+    class="btn btn-sm btn-warning mb-2">
+
+    Редактировать вопрос
+
+</a>
+
+<a
+    href="{% url 'delete_question' question.id %}"
+    class="btn btn-sm btn-danger mb-2">
+
+    <i class="bi bi-trash"></i>
+
+</a>
+
+    {% endif %}
+
+
+        <ul>
+
+            {% for answer in question.answers.all %}
+
+            <li>
+
+                {{ answer.text }}
+
+                {% if user == quiz.author %}
+
+                <a
+                        href="{% url 'edit_answer' answer.id %}"
+                        class="btn btn-sm btn-warning">
+
+                    <i class="bi bi-pencil-square"></i>
+
+                </a>
+
+                <a
+                        href="{% url 'delete_answer' answer.id %}"
+                        class="btn btn-sm btn-danger">
+
+                    <i class="bi bi-trash"></i>
+
+                </a>
+
+
+                {% endif %}
+
+            </li>
+
+            {% empty %}
+
+            <li>
+
+                Пока нет ответов
+
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<p>Пока нет вопросов.</p>
+
+{% endfor %}
+
+<br>
+
+<div class="card">
+
+    <div class="card-body">
+
+        <h3>
+
+            <i class="bi bi-chat"></i>
+
+            Комментарии
+
+        </h3>
+
+        {% if user.is_authenticated %}
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ comment_form.as_p }}
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Отправить
+
+            </button>
+
+        </form>
+
+        <hr>
+
+        {% endif %}
+
+        {% for comment in quiz.comments.all %}
+
+        <div class="mb-3">
+
+            <strong>
+
+                <i class="bi bi-person-circle"></i>
+
+                {{ comment.author.username }}
+
+            </strong>
+
+            <small class="text-muted">
+
+                {{ comment.created_at|date:"d.m.Y H:i" }}
+
+            </small>
+
+            {% if user == comment.author or user.is_staff %}
+
+            <a
+            href="{% url 'delete_comment' comment.id %}"
+            class="btn btn-sm btn-danger">
+
+                <i class="bi bi-trash"></i>
+
+            </a>
+
+            {% endif %}
+
+            <p class="mt-2">
+
+                {{ comment.text }}
+
+            </p>
+
+        </div>
+
+        <hr>
+
+        {% empty %}
+
+        <p>
+
+            Пока комментариев нет.
+
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

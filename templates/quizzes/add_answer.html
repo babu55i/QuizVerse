@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="mb-4">
+
+Добавить ответ
+
+</h1>
+
+<h5 class="mb-3">
+
+Вопрос:
+
+{{ question.text }}
+
+</h5>
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button
+        type="submit"
+        class="btn btn-primary">
+
+        Сохранить ответ
+
+    </button>
+
+</form>
+
+{% endblock %}
